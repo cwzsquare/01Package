@@ -1,0 +1,4 @@
+number:	10
+capacity:	30
+weight:	1	2	3	2   8  10  8  6   1   4   
+value:	4	6	12	7   2   18  2   7   9   10
