@@ -6,6 +6,7 @@
 // 实验细节：
 // 语言不限，要求将6种算法实现为6个函数，并在测试时一次性全部输出结果；
 // 测试数据在附件的压缩包中。
+#define DATAIN 20
 #include <stdio.h>
 #include <iostream>
 #include <ctime>
@@ -280,10 +281,38 @@ int MonteCarlo(int number, int capacity, int weight[], int value[])
 
 int main()
 {
+
+#if DATAIN == 4
+    int number = 4;
+    int capacity = 6;
+    int weight[20] = {1, 2, 3, 2};
+    int value[20] = { 4, 6, 12, 7};
+
+#endif
+
+#if DATAIN == 10
+    int number = 10;
+    int capacity = 30;
+    int weight[20] = {1, 2, 3, 2, 8, 10, 8, 6, 1, 4};
+    int value[20] = {4, 6, 12, 7, 2, 18, 2, 7, 9, 10};
+
+#endif
+
+#if DATAIN == 15
+    int number = 15;
+    int capacity = 30;
+    int weight[20] = {1, 2, 3, 2, 8, 10, 8, 6, 1, 4, 3, 4, 3, 7, 8};
+    int value[20] = {4, 6, 12, 7, 2, 18, 2, 7, 9, 10, 28, 12, 7, 2, 17};
+
+#endif
+
+#if DATAIN == 20
     int number = 20;
     int capacity = 50;
     int weight[20] = {1, 2, 3, 2, 8, 10, 8, 6, 1, 4, 3, 4, 3, 7, 8, 7, 14, 13, 3, 5};
     int value[20] = {4, 6, 12, 7, 2, 18, 2, 7, 9, 10, 28, 12, 7, 2, 17, 4, 17, 4, 8, 9};
+
+#endif
 
     auto start = system_clock::now();
     printf("%d,", overall(number, capacity, weight, value));
