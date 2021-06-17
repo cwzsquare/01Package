@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <queue>
 #define max(a, b) ((a) > (b) ? (a) : (b))
-#define MONTECARLO 1000000 //蒙特卡洛算法超参数
+#define MONTECARLO 1e6 //蒙特卡洛算法超参数
 using namespace std;
 using namespace chrono;
 typedef struct node
@@ -119,7 +119,7 @@ int dynamic(int number, int capacity, int weight[], int value[])
 }
 
 //回溯法内部函数
-int KnapBacktrack_inner(int i, int cw, int cv, int bestv, int number, int capacity, int weight[], int value[])
+int knapBacktrack_inner(int i, int cw, int cv, int bestv, int number, int capacity, int weight[], int value[])
 {
     if (i >= number)
     {
@@ -131,20 +131,20 @@ int KnapBacktrack_inner(int i, int cw, int cv, int bestv, int number, int capaci
         {
             cw += weight[i];
             cv += value[i];
-            bestv = KnapBacktrack_inner(i + 1, cw, cv, bestv, number, capacity, weight, value);
+            bestv = knapBacktrack_inner(i + 1, cw, cv, bestv, number, capacity, weight, value);
             cw -= weight[i];
             cv -= value[i];
         }
-        bestv = KnapBacktrack_inner(i + 1, cw, cv, bestv, number, capacity, weight, value);
+        bestv = knapBacktrack_inner(i + 1, cw, cv, bestv, number, capacity, weight, value);
     }
     return bestv;
 }
 
 //回溯法
-int KnapBacktrack(int number, int capacity, int weight[], int value[])
+int knapBacktrack(int number, int capacity, int weight[], int value[])
 {
     int cw = 0, cv = 0, bestv = 0;
-    bestv = KnapBacktrack_inner(0, cw, cv, bestv, number, capacity, weight, value);
+    bestv = knapBacktrack_inner(0, cw, cv, bestv, number, capacity, weight, value);
     return bestv;
 }
 
@@ -203,7 +203,7 @@ double bound(int i, int cp, int cw, int *value, int *weight, int number, int cap
 }
 
 //分支限界法
-int Knapsack(int number, int capacity, int weight[], int value[])
+int knapsack(int number, int capacity, int weight[], int value[])
 {
     //初始化
     int *tmp_weight = (int *)malloc(sizeof(int) * number);
@@ -339,7 +339,7 @@ int main()
          << "秒" << endl;
 
     start = system_clock::now();
-    printf("%d,", KnapBacktrack(number, capacity, weight, value));
+    printf("%d,", knapBacktrack(number, capacity, weight, value));
     end = system_clock::now();
     duration = duration_cast<microseconds>(end - start);
     cout << "回溯法花费了"
@@ -347,7 +347,7 @@ int main()
          << "秒" << endl;
 
     start = system_clock::now();
-    printf("%d,", Knapsack(number, capacity, weight, value));
+    printf("%d,", knapsack(number, capacity, weight, value));
     end = system_clock::now();
     duration = duration_cast<microseconds>(end - start);
     cout << "分支界限法花费了"
